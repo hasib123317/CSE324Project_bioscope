@@ -8,27 +8,25 @@
 	</script>
 	<div id="schedulebox" style="margin-top:100px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
 		<div class="table-responsive">
-			@foreach($data as $show_data)
+			@foreach($dates as $date)
 				<table class="table table-hover">
-					<caption>Hall no. {{ $show_data[0] }}</caption>
+					<caption>{{ $date }}</caption>
 					<tbody>
-				@if(count($show_data[1]) > 0)
-					@foreach($show_data[1] as $show)
-						<tr>
-							<td>{{ $show->movie_name }}</td>
-							<td>{{ $show->start_time }}</td>
-							<td>{{ $show->end_time }}</td>
-							<td>{{ $show->available_seat }}</td>
-							<td><a href="{{ url('login') }}">Book now</a></td>
-						</tr>
-					@endforeach
-				@else
-						<tr>
-							<td><strong>No show on upcoming 7 days</strong></td>
-						</tr>
-				@endif
+						@foreach($halls as $hall)
+							<tr class="success">
+								<td align="center"><strong>Hall {{ $data[$date][$hall->id]['hallName'] }}</strong></td>
+							</tr>
+							@foreach($movies as $movie)
+								<tr>
+									<td>{{ $movie->name }}</td>
+									@foreach($data[$date][$hall->id][$movie->name] as $scheduleList)
+										<td>{{ $scheduleList->showTime }}</td>
+									@endforeach
+								</tr>
+							@endforeach
+						@endforeach
 					</tbody>
-	  			</table>
+				</table>
 			@endforeach
 		</div>	
 	</div>
