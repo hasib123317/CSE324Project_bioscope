@@ -51,7 +51,7 @@
                                     <!-- Button -->
 									
                                     <div class="col-sm-12 controls">
-                                      <a id="btn-login" onClick="$('#loginform').submit();" class="btn btn-success">Login</a>
+                                      <a id="btn-login" onClick="$('#loginform').submit();" class="btn btn-success" value="loginbutton">Login</a>
                                       <!--<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>-->
 
                                     </div>
@@ -129,7 +129,7 @@
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info" onClick="$('#signupform').submit();"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                                        <button id="btn-signup" type="button" class="btn btn-info" onClick="$('#signupform').submit();" value="signupbutton"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
                                         <!--<span style="margin-left:8px;">or</span>-->  
                                     </div>
                                 </div>
