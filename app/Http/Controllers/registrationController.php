@@ -16,7 +16,7 @@ class registrationController extends Controller
 	public function signup(Request $request)
 	{
 		$this->validate($request, [
-			'email' => 'required',
+			'email' => 'email|required',
 			'name' => 'required',
 			'password' => 'required',
 			'phone_no' => 'required',
