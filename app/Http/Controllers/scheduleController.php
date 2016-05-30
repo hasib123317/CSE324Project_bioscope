@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use DB;
 use App\Hall;
+use App\Movie;
 
 class scheduleController extends Controller
 {
