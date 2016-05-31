@@ -86,10 +86,7 @@ class AuthController extends Controller
 		]);
 		
 		if(Auth::attempt([ 'email' => $request->all()['email'], 'password' => $request->all()['password'] ])){
-			$user = DB::select('select * from user where email=?', [ $request->all()['email'] ]);			
-			session([ 'email' => $request->all()['email'] , 'name' => $user[0]->name ]);
-
-			if($user[0]->isadmin == false){	
+			if(Auth::user()->isadmin == false){	
 				return redirect('/')->with([ 'email' => $request->all()['email'] ]);
 			}
 			else{
