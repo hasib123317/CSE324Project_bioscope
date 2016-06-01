@@ -16,26 +16,11 @@
                             
                         <form id="loginform" class="form-horizontal" role="form" action="{{ url('#') }}" method="POST">
                             {!! csrf_field() !!}
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                 <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="email">                                        
-                            </div>
-                                
-                            <div style="margin-bottom: 25px" class="input-group">
-                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <div class="input-group">
                                  <label for="input-1" class="control-label">Rate This</label>
     							 <input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
                             </div>
-                            <div class="input-group">
-                                 <div class="checkbox">
-                                    <label for="input-1" class="control-label">Rate This</label>
-    								<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
-                                 </div>
-                            </div>
-
-					
-                            <div style="margin-top:10px" class="form-group">
+							<div style="margin-top:10px" class="form-group">
                                  <!-- Button -->
 									
                                  <div class="col-sm-12 controls">
@@ -48,5 +33,9 @@
                  </div>  
           </div>
      </div>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link href="{{ asset('css/star-rating.css') }}" media="all" rel="stylesheet" type="text/css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="{{ asset('js/star-rating.js') }}" type="text/javascript"></script>
 @stop
 

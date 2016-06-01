@@ -24,7 +24,7 @@ Route::get('/about', function() {
 });
 
 Route::get('/rate', function() {
-	return view('home');
+	return view('rating');
 });
 
 Route::get('/login', 'Auth\AuthController@login');
