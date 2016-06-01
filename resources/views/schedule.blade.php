@@ -9,29 +9,32 @@
 	<div id="schedulebox" style="margin-top:100px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
 		<div class="table-responsive">
 			@foreach($dates as $date)
-				<table class="table table-hover">
+				<table class="table table-hover table-striped">
 					<caption>{{ $date }}</caption>
 					<tbody>
 						@foreach($halls as $hall)
 							<tr class="success">
 								<td align="center"><strong>Hall {{ $data[$date][$hall->id]['hallName'] }}</strong></td>
 							</tr>
-							@foreach($movies as $movie)
-								<tr>
-									{{-- @if(count($data[$date][$hall->id][$movie->name])>0)
-									<td>{{ $movie->name }}</td>
-		
-									@foreach($data[$date][$hall->id][$movie->name] as $scheduleList)
-										<td>{{ $scheduleList->showTime }}</td>
-									@endforeach
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									@endif
-									--}}
+							@if($data[$date][$hall->id]['showCount']>0)
+								@foreach($movies as $movie)
+									<tr>
+										@if(count($data[$date][$hall->id][$movie->name])>0)
+											<td class="active">{{ $movie->name }}</td>				
+											@foreach($data[$date][$hall->id][$movie->name] as $scheduleList)
+												<td class="active">{{ $scheduleList->showTime }}</td>
+											@endforeach
+											@for($l=4-count($data[$date][$hall->id][$movie->name]);$l>0;$l--)
+												<td class="active"></td>
+											@endfor
+										@endif
+									</tr>
+								@endforeach
+							@else
+								<tr class="active">
+									<td align="center"><strong>No show on this day</strong></td>
 								</tr>
-							@endforeach
+							@endif
 						@endforeach
 					</tbody>
 				</table>

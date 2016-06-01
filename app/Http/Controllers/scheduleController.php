@@ -27,11 +27,18 @@ class scheduleController extends Controller
 			foreach($halls as $hall)
 			{
 				$data[$dates[$l]][$hall->id]['hallName'] = $hall->id;
+				$data[$dates[$l]][$hall->id]['showCount'] = DB::select(
+														DB::raw( 
+															"select COUNT(*) as showCount 
+															 from shows where shows.hall_id = $hall->id and 
+															 DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$dates[$l]'"
+   														)
+														)[0]->showCount; 
 				foreach($movies as $movie)
 				{
 					$data[$dates[$l]][$hall->id][$movie->name] = DB::select( 
 														 DB::raw(
-															"select movie.name, DATE_FORMAT(shows.start_time,'%h:%i') as showTime 
+															"select DATE_FORMAT(shows.start_time,'%h:%i') as showTime  
 															 from shows inner join movie on shows.movie_id = movie.id 
 															 where movie.name = '$movie->name' and shows.hall_id = $hall->id and 
 															 DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$dates[$l]' order by showTime"
