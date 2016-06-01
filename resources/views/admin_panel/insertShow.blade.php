@@ -66,14 +66,14 @@
                                     <div class="form-group">
                                         <label for="regular_ticket_price" class="col-md-3 control-label">Start time</label>
                                         <div class="col-md-9">
-                                            <p id="datepair">
+                                            <p id="#datepair">
                                                 <input type="text" class="date start">
                                                 <input type="text" class="time start">
                                             </p>
                                         </div>
                                     </div>
-                                    <script src={{ asset('js/datepair.js') }}></script>
-                                    <script src={{ asset('js/jquery.datepair.js') }}></script>
+                                    <script src="{{ asset('js/datepair.js') }}"></script>
+                                    <script src="{{ asset('js/jquery.datepair.js') }}"></script>
                                     <script>
                                         // initialize input widgets first
                                         $('#datepair.time').timepicker({
@@ -81,18 +81,18 @@
                                             'timeFormat': 'g:ia'
                                         });
 
-                                        $('#datepair .date').datepicker({
+                                        $('#datepair.date').datepicker({
                                             'format': 'yyyy-m-d',
                                             'autoclose': true
                                         });
-
+										
                                         // initialize datepair
-                                        $('#datepair').datepair();
+          								$('#datepair').datepair();
                                     </script>
                                     <div class="form-group">
                                         <label for="regular_ticket_price" class="col-md-3 control-label">Language</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" name="regular_ticket_price" placeholder="Regular Ticket Price">
+                                            <input type="text" class="form-control" name="premium_ticket_price" placeholder="Premium Ticket Price">
                                         </div>
                                     </div>
                                     <div class="form-group">

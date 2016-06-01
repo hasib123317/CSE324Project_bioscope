@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                             <strong>Welcome {{ session('name') }} ! </strong>
+                             <strong>Welcome {{ Auth::user()->name }} ! </strong>
                         </div>
                        
                     </div>
