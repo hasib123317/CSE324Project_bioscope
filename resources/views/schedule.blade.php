@@ -18,10 +18,18 @@
 							</tr>
 							@foreach($movies as $movie)
 								<tr>
+									{{-- @if(count($data[$date][$hall->id][$movie->name])>0)
 									<td>{{ $movie->name }}</td>
+		
 									@foreach($data[$date][$hall->id][$movie->name] as $scheduleList)
 										<td>{{ $scheduleList->showTime }}</td>
 									@endforeach
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									@endif
+									--}}
 								</tr>
 							@endforeach
 						@endforeach

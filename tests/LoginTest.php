@@ -7,59 +7,72 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LoginTest extends TestCase
 {
 	/*
+	 * A test case to test AuthController@login
+	 */
+	public function testLoginLanding()
+	{
+		$this->visit('/login')
+			 ->see('login');
+	}
+    /*
 	 * A test suite to test AuthController@authenticateAttempt
 	 */
-	public function successfulUserLoginTest()
+	public function testSuccessfulUserLogin()
 	{
+		$credentials = ['email'=>'root', 'password'=>'123456'];
+
+		Auth::shouldReceive('attempt')->once()->with($credentials)->andReturn(true);
 		$this->visit('/login')
 			 ->type('root', 'email')
 			 ->type('123456', 'password')
-			 ->press('btn-login')
+			 ->click('Login')
 			 ->seePageIs('/');
-	}
-
-	public function successfulAdminLoginTest()
+    }
+	/*
+	public function testSuccessfulAdminLogin()
 	{
 		$this->visit('/login')
 			 ->type('adnan@gmail.com', 'email')
 			 ->type('123456', 'password')
-			 ->press('btn-login')
+			 ->click('Login')
 			 ->seePageIs('/admin-panel');
 	}
 
-	public function unsuccessfulLoginTest()
+	public function testUnsuccessfulLogin()
 	{
 		$this->visit('/login')
 			 ->type('root1', 'email')
 			 ->type('12345', 'password')
-			 ->press('btn-login')
+			 ->click('Login')
 			 ->seePageIs('/login');
 	}
-
-	public function partialFormEmailLoginTest()
+	/*
+	public function testPartialFormEmailLogin()
 	{
+		Auth::shouldReceive('attempt')->once()->with(['email'=>'root', 'password'=>'123456'])->andReturn(true);
 		$this->visit('/login')
 			 ->type('root', 'email')
-			 ->press('btn-login')
-			 ->seePageIs('/login');
-			 ->->see('<li>The password field is required</li>')
+			 ->click('Login')
+			 ->seePageIs('/login')
+			 ->see('The password field is required');
 	}
-	
-	public function partialFormPasswordLoginTest()
+	/*
+	public function testPartialFormPasswordLogin()
 	{
 		$this->visit('/login')
 			 ->type('123456', 'password')
-			 ->press('btn-login')
-			 ->seePageIs('/login');
-			 ->see('<li>The email field is required</li>')
+			 ->click('Login')
+			 ->seePageIs('/login')
+			 ->see('The email field is required');
 	}
 
-	public function blankFormLoginTest()
+	public function testBlankFormLogin()
 	{
 		$this->visit('/login')
-			 ->press('btn-login')
-			 ->seePageIs('/login');
-			 ->see('<li>The email field is required</li>')
-			 ->see('<li>The password field is required</li>');
+			 ->click('Login')
+			 ->seePageIs('/login')
+			 ->see('The email field is required')
+			 ->see('The password field is required');
 	}
+	*/
 }
