@@ -14,6 +14,8 @@ use App\User;
 class adminController extends Controller
 {
     //
+	private $imgDestination = 'img';
+
 	public function index() 
 	{
 		if(Auth::check() && Auth::user()->isadmin){
@@ -130,7 +132,6 @@ class adminController extends Controller
 	public function insertMovie()
 	{
 		if(Auth::check() && Auth::user()->isadmin){
-			
 			return view('admin_panel.insertMovie');
 		}
 	}
@@ -153,8 +154,18 @@ class adminController extends Controller
 		$movie->genre = $request->get('genre');
 		$movie->rating = $request->get('rating');
 		$movie->certificate = $request->get('certificate');		
+		
+		if($request->hasFile('img_path') && $request->file('img_path')->isValid()){
+			$file = $request->file('img_path');
+			$movie->img_path = $this->imgDestination.'/'.$request->get('name').'.'.substr($file->getMimeType(), 6);
+
+			$file->move($this->imgDestination, $request->get('name').'.'.substr($file->getMimeType(), 6));
+		}		
+		else{
+			$movie->img_path = NULL;
+		}
 		$movie->save();
-				
+		
 		$movies = Movie::all();
 
 		return redirect('/admin-panel/movies')->with([ 'movies' => $movies ]);
@@ -189,6 +200,17 @@ class adminController extends Controller
 		$movie->genre = $request->get('genre');
 		$movie->rating = $request->get('rating');
 		$movie->certificate = $request->get('certificate');		
+		
+		if($request->hasFile('img_path') && $request->file('img_path')->isValid()){
+			if(file_exists($movie->img_path)){
+				unlink($movie->img_path);
+			}
+	
+			$file = $request->file('img_path');
+			$movie->img_path = $this->imgDestination.'/'.$request->get('name').'.'.substr($file->getMimeType(), 6);
+
+			$file->move($this->imgDestination, $request->get('name').'.'.substr($file->getMimeType(), 6));
+		}		
 		$movie->save();
 
 		$movies = Movie::all();
@@ -198,6 +220,11 @@ class adminController extends Controller
 	public function deleteMovie($id)
 	{
 		if(Auth::check() && Auth::user()->isadmin){
+			$movie = Movie::find($id);			
+
+			if(file_exists($movie->img_path)){
+				unlink($movie->img_path);
+			}
 			Movie::destroy($id);
 
 			$movies = Movie::all();

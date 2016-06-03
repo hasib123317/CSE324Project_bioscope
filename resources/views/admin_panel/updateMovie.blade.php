@@ -26,7 +26,7 @@
                                 <!--<div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>-->
                             </div>  
                             <div class="panel-body" >
-                                <form id="signupform" class="form-horizontal" role="form" action="{{ url('/admin-panel/movies/save/'.$movie->id) }}" method="POST">
+                                <form id="signupform" class="form-horizontal" role="form" enctype='multipart/form-data' action="{{ url('/admin-panel/movies/save/'.$movie->id) }}" method="POST">
                                     
     								{!! csrf_field() !!}
 
@@ -77,7 +77,13 @@
                                             <input type="text" class="form-control" name="certificate" placeholder="Certificate" value="{{ $movie->certificate }}">
                                         </div>
                                     </div>
-                                        
+                                    
+									<div class="form-group">
+                                        <label for="img_path" class="col-md-3 control-label">Certificate</label>
+                                        <div class="col-md-9">
+                                            <input type="file" class="form-control" name="img_path" placeholder="Uploaded image" value="{{ $movie->img_path }}">
+                                        </div>
+                                    </div>
                                     <!--<div class="form-group">
                                         <label for="icode" class="col-md-3 control-label">Invitation Code</label>
                                         <div class="col-md-9">
