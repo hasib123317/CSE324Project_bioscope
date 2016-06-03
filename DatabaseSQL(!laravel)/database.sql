@@ -23,6 +23,7 @@ CREATE TABLE movie (
 	genre VARCHAR(50),
 	rating DOUBLE(5,2),
 	certificate VARCHAR(10),
+	img_path VARCHAR(255),
 
 	PRIMARY KEY(id)
 );
