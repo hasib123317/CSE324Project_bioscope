@@ -24,6 +24,7 @@ CREATE TABLE movie (
 	rating DOUBLE(5,2),
 	certificate VARCHAR(10),
 	img_path VARCHAR(255),
+	rated_by INTEGER(5),
 
 	PRIMARY KEY(id)
 );

@@ -153,7 +153,8 @@ class adminController extends Controller
 		$movie->name = $request->get('name');
 		$movie->genre = $request->get('genre');
 		$movie->rating = $request->get('rating');
-		$movie->certificate = $request->get('certificate');		
+		$movie->certificate = $request->get('certificate');
+		$movie->rated_by = 0;				
 		
 		if($request->hasFile('img_path') && $request->file('img_path')->isValid()){
 			$file = $request->file('img_path');

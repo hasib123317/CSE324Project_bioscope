@@ -16,9 +16,16 @@
                             
                         <form id="loginform" class="form-horizontal" role="form" action="{{ url('#') }}" method="POST">
                             {!! csrf_field() !!}
+							<div class="input-group">
+                                 <label for="input-1" class="control-label">Rate This</label>
+								 <select name="menu" id="selectmenu"> //added an id here
+    									<option value="1">LINK 1</option> //changed the value to the slider you want to go to
+   										<option value="2">LINK 2</option>....
+ 								 </select>
+    						</div>
                             <div class="input-group">
                                  <label for="input-1" class="control-label">Rate This</label>
-    							 <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
+    							 <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="10" data-step="1">
                             </div>
 							<div style="margin-top:10px" class="form-group">
                                  <!-- Button -->
@@ -37,5 +44,6 @@
 	<link href="{{ asset('css/star-rating.css') }}" media="all" rel="stylesheet" type="text/css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="{{ asset('js/star-rating.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/jquery-1.11.1.min.js') }}" type="text/javascript"></script>
 @stop
 
