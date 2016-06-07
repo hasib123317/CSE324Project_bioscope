@@ -36,14 +36,14 @@
                     <hr>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <img class="img-responsive" src="" alt="">
+                    <img class="img-responsive" src="http://localhost/ci2/images/mobin.jpg" alt="">
                     <h3>Jaiaid Mobin
                         <small>1205019</small>
                     </h3>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <img class="img-responsive" src="" alt="">
-                    <h3>Rakin Sir
+                    <img class="img-responsive" src="http://localhost/ci2/images/rakin_sir.jpg" alt="">
+                    <h3>‎Chowdhury Md Rakin Haider
                         <small>Project Supervisor</small>
                     </h3>
                 </div>

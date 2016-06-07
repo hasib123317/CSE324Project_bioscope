@@ -8,11 +8,11 @@
                  
 
  <li >
-                        <a href="{{ url('admin-panel') }}" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                        <a href="{{ url('admin-panel') }}" ><i class="fa fa-desktop "></i>Dashboard</a>
                     </li>
        
                     <li class="active-link">
-                        <a href="{{ url('admin-profile') }}"><i class="fa fa-edit "></i>My Profile Page  <span class="badge">Included</span></a>
+                        <a href="{{ url('admin-profile') }}"><i class="fa fa-edit "></i>My Profile Page</a>
                     </li>
 
                 </ul>
@@ -24,25 +24,90 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>BLANK PAGE </h2>   
+                     <h2>My Profile Page </h2>   
                     </div>
-                </div>              
+                </div>
+
+        <a href="{{ url('/admin-profile/edit') }}">Edit</a>
+         <div class="row">
+
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">First Name:</label>
+              <div class="col-xs-7 controls">Admin</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Last Name:</label>
+              <div class="col-xs-7 controls">The boss</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">User Name:</label>
+              <div class="col-xs-7 controls">{{ Auth::user()->name }}</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Email:</label>
+              <div class="col-xs-7 controls">{{ Auth::user()->email }}</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">City:</label>
+              <div class="col-xs-7 controls">Dhaka</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Country:</label>
+              <div class="col-xs-7 controls">Bangladesh</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Birthday:</label>
+              <div class="col-xs-7 controls">Jan 22, 1994</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Interests:</label>
+              <div class="col-xs-7 controls">Basketball, Web, Design, Gaming etc.</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Website:</label>
+              <div class="col-xs-7 controls"><a href="http://facebook.com">Bioscope.com</a></div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row mgbt-xs-0">
+              <label class="col-xs-5 control-label">Phone:</label>
+              <div class="col-xs-7 controls">{{ Auth::user()->phone_no }}</div>
+              <!-- col-sm-10 --> 
+            </div>
+          </div>
+        </div>              
                  <!-- /. ROW  -->
-                  <hr />
               
                  <!-- /. ROW  -->           
-    </div>
-             <!-- /. PAGE INNER  -->
             </div>
+             <!-- /. PAGE INNER  -->
+        </div>
          <!-- /. PAGE WRAPPER  -->
-        </div>
-    <div class="footer">
-      
-    
-             <div class="row">
-                <div class="col-lg-12" >
-                    &copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;"  target="_blank">www.binarytheme.com</a>
-                </div>
-        </div>
         </div>
 @stop

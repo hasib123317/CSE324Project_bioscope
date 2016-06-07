@@ -21,7 +21,7 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <span class="glyphicon glyphicon-fire"></span> 
-                    Logo
+                    Bioscope : A Cineplex Management Solution
                 </a>
             </div>
             <!-- Navbar links -->
@@ -56,7 +56,7 @@
 					<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello {{ Auth::user()->name }}<span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="about-us">
-                            <li><a href="">See profile</a></li>
+                            <li><a href="{{ url('/seeProfile') }}">See profile</a></li>
                             <li><a href="{{ url('/logout') }}">logout</a></li>
                         </ul>
                     </li>
@@ -64,13 +64,6 @@
 									
                 </ul>
 
-                <!-- Search -->
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
 
             </div>
             <!-- /.navbar-collapse -->

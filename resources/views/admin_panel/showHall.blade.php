@@ -8,11 +8,11 @@
 
 
             <li >
-                <a href="{{ url('admin-panel') }}" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                <a href="{{ url('admin-panel') }}" ><i class="fa fa-desktop "></i>Dashboard</a>
             </li>
 
             <li>
-                <a href="{{ url('admin-profile') }}"><i class="fa fa-edit "></i>My Profile Page  <span class="badge">Included</span></a>
+                <a href="{{ url('admin-profile') }}"><i class="fa fa-edit "></i>My Profile Page </a>
             </li>
 
         </ul>

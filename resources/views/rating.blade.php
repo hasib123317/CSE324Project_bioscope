@@ -3,6 +3,24 @@
 @section('title', 'rate a movie')
 
 @section('content')
+<div class="jumbotron feature">       
+<div class="container">
+	<nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					<li class="active-link">
+                    	<a><i class="fa fa-desktop ">Select the movie you want to rate</i></a>
+                    </li>
+                 	@foreach($movies as $movie)
+
+                    	<li class="active-link">
+                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='{{ $movie->name }};"><i class="fa fa-desktop ">{{ $movie->name }}</i></button><h2>{{ $movie->rating }}</h2>
+                    	</li>
+                   	@endforeach
+                </ul>
+           </div>
+    </nav>
+
 	<script type="text/javascript">
 		document.getElementById('rating').className="active";
 	</script>
@@ -14,19 +32,15 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form" action="{{ url('#') }}" method="POST">
+                        <form id="loginform" class="form-horizontal" role="form" action="{{ url('/rating-done') }}" method="POST">
                             {!! csrf_field() !!}
-							<div class="input-group">
-                                 <label for="input-1" class="control-label">Rate This</label>
-								 <select name="menu" id="selectmenu"> //added an id here
-    									<option value="1">LINK 1</option> //changed the value to the slider you want to go to
-   										<option value="2">LINK 2</option>....
- 								 </select>
-    						</div>
+														
                             <div class="input-group">
                                  <label for="input-1" class="control-label">Rate This</label>
-    							 <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="10" data-step="1">
+    							 <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
                             </div>
+							<input id="movie_name" name="movie" type="hidden" value="">
+
 							<div style="margin-top:10px" class="form-group">
                                  <!-- Button -->
 									
@@ -36,10 +50,13 @@
 								 </div>
                             </div> 
                         </form>
+                        <p>Current rating is </p>
 					</div>                     
              </div>  
         </div>
     </div>
+</div>
+</div>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href="{{ asset('css/star-rating.css') }}" media="all" rel="stylesheet" type="text/css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

@@ -79,7 +79,7 @@
                                     </div>
                                     
 									<div class="form-group">
-                                        <label for="img_path" class="col-md-3 control-label">Certificate</label>
+                                        <label for="img_path" class="col-md-3 control-label">Image</label>
                                         <div class="col-md-9">
                                             <input type="file" class="form-control" name="img_path" placeholder="Uploaded image" value="{{ $movie->img_path }}">
                                         </div>

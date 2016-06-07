@@ -10,6 +10,7 @@ use App\Hall;
 use App\Movie;
 use App\Shows;
 use App\User;
+use DB;
 
 class adminController extends Controller
 {
@@ -27,6 +28,34 @@ class adminController extends Controller
 	{
 		if(Auth::check() && Auth::user()->isadmin){
 			return view('blank');
+		}
+	}
+
+	public function saveAdmin(Request $request) 
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			$this->validate($request, [
+			'email' => 'email|required',
+			'name' => 'required',
+			'password' => 'required',
+			'phone_no' => 'required',
+			]);
+		
+			$user = User::find(Auth::user()->id);
+			$user->name = $request->get('name');
+			$user->email = $request->get('email');
+			$user->password = \Hash::make($request->get('password'));
+			$user->phone_no = $request->get('phone_no');
+			$user->save();
+					
+			return view('blank');
+		}
+	}
+
+	public function updateAdmin() 
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			return view('updateAdmin');
 		}
 	}
 
@@ -208,9 +237,12 @@ class adminController extends Controller
 			}
 	
 			$file = $request->file('img_path');
-			$movie->img_path = $this->imgDestination.'/'.$request->get('name').'.'.substr($file->getMimeType(), 6);
 
-			$file->move($this->imgDestination, $request->get('name').'.'.substr($file->getMimeType(), 6));
+			$filename = str_replace(':', '_', $request->get('name')).'.'.substr($file->getMimeType(), 6);
+			//$filename = str_replace(':', '_', $filename);
+			$movie->img_path = $this->imgDestination.'/'.$filename;
+
+			$file->move($this->imgDestination, $filename);
 		}		
 		$movie->save();
 
@@ -232,7 +264,31 @@ class adminController extends Controller
 			return redirect('/admin-panel/movies')->with([ 'movies' => $movies ]);
 		}
 	}
-
+	public function queryMovie(Request $request){
+		if($request->get('rating')==NULL && $request->get('genre')==NULL){
+			return redirect('/admin-panel/movies');
+		}
+		elseif ($request->get('genre')==NULL) {
+			//return "eikhane mara";
+			$movies = DB::table('movie')
+                ->where('rating', '>=', $request->get('rating'))
+                ->get();
+			return view('admin_panel.showMovie', [ 'movies' => $movies ]);
+		}
+		elseif($request->get('rating')==NULL){
+			$movies = DB::table('movie')
+                ->where('genre', 'ilike', $request->get('genre'))
+                ->get();
+			return view('admin_panel.showMovie', [ 'movies' => $movies ]);
+		}
+		else{
+			$movies = DB::table('movie')
+                ->where('rating', '>=', $request->get('rating'))
+                ->where('genre', 'like', $request->get('genre'))
+                ->get();
+			return view('admin_panel.showMovie', [ 'movies' => $movies ]);
+		}
+	}
 	public function displayShow()
 	{
 		if(Auth::check() && Auth::user()->isadmin){		
@@ -240,6 +296,31 @@ class adminController extends Controller
 
 			return view('admin_panel.displayShow', [ 'shows' => $shows]);
 		}	
+	}
+
+	public function queryShow(Request $request){
+		if($request->get('hall')==NULL && $request->get('date')==NULL){
+			return redirect('/admin-panel/shows');
+		}
+		elseif ($request->get('date')==NULL) {
+			$shows = DB::table('shows')
+                ->where('hall_id', '=', $request->get('hall'))
+                ->get();
+			return view('admin_panel.displayShow', [ 'shows' => $shows]);
+		}
+		elseif($request->get('hall')==NULL){
+			$shows = DB::table('shows')
+                ->whereDate('start_time', '=',$request->get('date'))
+                ->get();
+			return view('admin_panel.displayShow', [ 'shows' => $shows]);
+		}
+		else{
+			$shows = DB::table('shows')
+                ->where('hall_id', '=', $request->get('hall'))
+                ->whereDate('start_time', '=',$request->get('date'))
+                ->get();
+			return view('admin_panel.displayShow', [ 'shows' => $shows]);
+		}
 	}
 
 	public function insertShow()
@@ -251,6 +332,81 @@ class adminController extends Controller
 			return view('admin_panel.insertShow', [ 'movies' => $movies, 'halls' => $halls ]);
 		}
 	}
+	
+	public function createShow(Request $request)
+	{
+		if(!Auth::check() || !Auth::user()->isadmin){
+			return;
+		}
+
+		$this->validate($request, [
+			'hall' => 'required',
+			'movie' => 'required',
+			'language' => 'required',
+			'start_time' => 'required'
+		]);
+		
+		$show = new Shows();
+		$show->hall_id = $request->get('hall');
+		$show->movie_id = Movie::where('name', '=', $request->get('movie'))->first()->id;
+		$show->start_time = date('Y-m-d H:i:s', strtotime($request->get('start_time')));
+		$show->language = $request->get('language');
+		$show->available_seat = Hall::find($request->get('hall'))->first()->seat;
+		$show->save();
+				
+		$shows = Shows::all();
+
+		return redirect('/admin-panel/shows')->with([ 'shows' => $shows ]);
+	}
+
+	public function updateShow($id)
+	{
+		if(!Auth::check() || !Auth::user()->isadmin){
+			return;
+		}
+
+		$movies = Movie::all('name');
+		$halls = Hall::all('id');
+		$show = Shows::find($id);
+
+		return view('admin_panel.updateShow', [ 'movies' => $movies, 'halls' => $halls , 'show' => $show ]);
+	}
+
+	public function saveShow(Request $request)
+	{
+		if(!Auth::check() || !Auth::user()->isadmin){
+			return;
+		}
+
+		$this->validate($request, [
+			'hall' => 'required',
+			'movie' => 'required',
+			'language' => 'required',
+			'start_time' => 'required'
+		]);
+		
+		$show = Shows::find($request->get('id'));
+		$show->hall_id = $request->get('hall');
+		$show->movie_id = Movie::where('name', '=', $request->get('movie'))->first()->id;
+		$show->start_time = date('Y-m-d H:i:s', strtotime($request->get('start_time')));
+		$show->language = $request->get('language');
+		$show->available_seat = Hall::find($request->get('hall'))->first()->seat;
+		$show->save();
+				
+		$shows = Shows::all();
+
+		return redirect('/admin-panel/shows')->with([ 'shows' => $shows ]);
+	}	
+
+	public function deleteShow($id)
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			Shows::destroy($id);
+
+			$shows = Shows::all();
+			return redirect('/admin-panel/shows')->with([ 'shows' => $shows ]);
+		}
+	}
 
 	public function showUser()
 	{
@@ -260,6 +416,50 @@ class adminController extends Controller
 			return view('admin_panel.showUser', [ 'users' => $users ]);
 		}
 	}
+
+	public function queryUser(Request $request){
+		if($request->get('book_count')==NULL){
+			return redirect('/admin-panel/users');
+		}
+		
+		else{
+			$users = DB::table('user')
+                ->where('book_count', '>=', $request->get('book_count'))
+                ->get();
+			return view('admin_panel.showUser', [ 'users' => $users ]);
+		}
+	}
+
+	public function insertAdmin()
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			return view('admin_panel.insertAdmin');
+		}
+	}
+	public function createAdmin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'email|required',
+			'name' => 'required',
+			'password' => 'required',
+			'phone_no' => 'required',
+		]);
+		
+		$user = new User;
+		$user->name = $request->get('name');
+		$user->email = $request->get('email');
+		$user->password = \Hash::make($request->get('password'));
+		$user->phone_no = $request->get('phone_no');
+		$user->isadmin = true;
+		$user->book_count = 0;
+		$user->remember_token = '';		
+		$user->save();
+				
+		$users = User::all();
+
+		return view('admin_panel.showAdmin', [ 'users' => $users ]);
+	}
+
 	public function showAdmin()
 	{
 		if(Auth::check() && Auth::user()->isadmin){

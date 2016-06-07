@@ -25,7 +25,7 @@
                     </button>
                     <a class="navbar-brand" href="#">
                     <span class="glyphicon glyphicon-fire"></span> 
-                    Logo
+                    Bioscope : A Cineplex Management Solution
                 	</a>
                     
                 </div>

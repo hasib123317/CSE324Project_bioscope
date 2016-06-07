@@ -14,7 +14,7 @@
 					<tbody>
 						@foreach($halls as $hall)
 							<tr class="success">
-								<td align="center"><strong>Hall {{ $data[$date][$hall->id]['hallName'] }}</strong></td>
+								<td align="center" width="100%"><strong>Hall {{ $data[$date][$hall->id]['hallName'] }}</strong></td>
 							</tr>
 							@if($data[$date][$hall->id]['showCount']>0)
 								@foreach($movies as $movie)
@@ -27,6 +27,7 @@
 											@for($l=4-count($data[$date][$hall->id][$movie->name]);$l>0;$l--)
 												<td class="active"></td>
 											@endfor
+											<td class="active"><a href="{{ url('/booking/'.$movie->name).'/'.$date.'/'.$data[$date][$hall->id]['hallName'] }}">Book Now!</a></td>
 										@endif
 									</tr>
 								@endforeach
