@@ -10,6 +10,7 @@ use App\Hall;
 use App\Movie;
 use App\Shows;
 use App\User;
+use App\Booking;
 use DB;
 
 class adminController extends Controller
@@ -269,7 +270,6 @@ class adminController extends Controller
 			return redirect('/admin-panel/movies');
 		}
 		elseif ($request->get('genre')==NULL) {
-			//return "eikhane mara";
 			$movies = DB::table('movie')
                 ->where('rating', '>=', $request->get('rating'))
                 ->get();
@@ -466,6 +466,23 @@ class adminController extends Controller
 			$users = User::all();
 
 			return view('admin_panel.showAdmin', [ 'users' => $users ]);
+		}
+	}
+
+	public function showBooking()
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			$bookings = Booking::getBookingMovieDescription();
+			$revenue = Booking::getTotalRevenue();
+
+			$movieData = array();
+			$movieData['sci-fi'] = Booking::getGenreBasedBookCount('sci-fi');
+			$movieData['action'] = Booking::getGenreBasedBookCount('action');
+			$movieData['fantasy'] = Booking::getGenreBasedBookCount('fantasy');
+			$movieData['animation'] = Booking::getGenreBasedBookCount('animation');
+			$movieData['drama'] = Booking::getGenreBasedBookCount('drama');			
+	
+			return view('admin_panel.showBooking', [ 'bookings' => $bookings , 'revenue' => $revenue , 'movieData' => $movieData ]);
 		}
 	}
 }

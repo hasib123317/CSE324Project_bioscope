@@ -92,6 +92,8 @@ Route::post('/createShow', 'adminController@createShow');
 
 Route::get('/admin-profile', 'adminController@profile');
 
+Route::get('/admin-panel/bookings', 'adminController@showBooking');
+
 Route::get('/week-schedule', 'scheduleController@nextweek');
 
 Route::get('/admin-panel/{id}', 'adminController@stub');

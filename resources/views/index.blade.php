@@ -95,7 +95,7 @@
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                       <div class="div-square">
-                           <a href="{{ url('admin-panel/booking') }}" >
+                           <a href="{{ url('admin-panel/bookings') }}" >
  <i class="fa fa-comments-o fa-5x"></i>
                       <h4>Booking</h4>
                       </a>

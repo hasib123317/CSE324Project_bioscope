@@ -95,3 +95,23 @@
 [07-06-2016 07:34:15] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
 [07-06-2016 07:34:21] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
 [07-06-2016 07:37:54] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[07-06-2016 05:45:32] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[07-06-2016 05:45:34] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:45:34] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[07-06-2016 05:45:36] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[07-06-2016 05:46:06] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[07-06-2016 05:46:08] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:46:08] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.sandbox.paypal.com/v1/payments/payment/PAY-6R504090DY9895822K5LQQQA
+[07-06-2016 05:46:10] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:46:10] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment/PAY-6R504090DY9895822K5LQQQA/execute
+[07-06-2016 05:46:12] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:53:16] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[07-06-2016 05:53:18] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:53:18] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[07-06-2016 05:53:20] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[07-06-2016 05:53:32] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[07-06-2016 05:53:33] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:53:33] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.sandbox.paypal.com/v1/payments/payment/PAY-5D159449CW164202HK5LQUDY
+[07-06-2016 05:53:35] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[07-06-2016 05:53:35] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.sandbox.paypal.com/v1/payments/payment/PAY-5D159449CW164202HK5LQUDY/execute
+[07-06-2016 05:53:37] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Booking' => $baseDir . '/app/Booking.php',
     'App\\Console\\Commands\\Inspire' => $baseDir . '/app/Console/Commands/Inspire.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\Event' => $baseDir . '/app/Events/Event.php',
@@ -16,7 +17,9 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\adminController' => $baseDir . '/app/Http/Controllers/adminController.php',
     'App\\Http\\Controllers\\bookingController' => $baseDir . '/app/Http/Controllers/bookingController.php',
+    'App\\Http\\Controllers\\homeController' => $baseDir . '/app/Http/Controllers/homeController.php',
     'App\\Http\\Controllers\\loginController' => $baseDir . '/app/Http/Controllers/loginController.php',
+    'App\\Http\\Controllers\\ratingController' => $baseDir . '/app/Http/Controllers/ratingController.php',
     'App\\Http\\Controllers\\registrationController' => $baseDir . '/app/Http/Controllers/registrationController.php',
     'App\\Http\\Controllers\\scheduleController' => $baseDir . '/app/Http/Controllers/scheduleController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

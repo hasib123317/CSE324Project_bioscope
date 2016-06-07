@@ -61,7 +61,10 @@ class bookingController extends Controller
 		$this->validate($request, [
     		'optradio' => 'required',
     	]);
+
 		Session::put('show_id', Shows::getIdByDateTimeHall($request->get('date'), $request->get('hall'), $request->get('time'))[0]->id);
+		Session::put('ticketPrice', $request->get('ticketPrice'));
+
 		$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
 		
@@ -167,6 +170,7 @@ class bookingController extends Controller
 			$booking->user_id =  Auth::user()->id;
 			$booking->show_id = Session::get('show_id');
 			$booking->booking_date = "'".date('Y-m-d h:i:s')."'";
+			$booking->price = Session::get('ticketPrice');
 			$booking->payment_id = "'".Input::get('paymentId')."'";
 			$booking->payer_id = "'".Input::get('PayerID')."'";
 			$booking->token = "'".Input::get('token')."'";

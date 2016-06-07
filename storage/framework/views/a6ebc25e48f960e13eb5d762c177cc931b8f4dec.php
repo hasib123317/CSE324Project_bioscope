@@ -11,7 +11,7 @@
         <!-- CUSTOM STYLES-->
     <link href="<?php echo e(asset('css/custom.css')); ?>" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div id="wrapper">
@@ -25,7 +25,7 @@
                     </button>
                     <a class="navbar-brand" href="#">
                     <span class="glyphicon glyphicon-fire"></span> 
-                    Logo
+                    Bioscope : A Cineplex Management Solution
                 	</a>
                     
                 </div>
