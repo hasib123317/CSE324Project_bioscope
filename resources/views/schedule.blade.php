@@ -1,5 +1,26 @@
 @extends('layouts.header')
+<style type="text/css">
+    table {
+    width:100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    }
 
+    td {
+    width:176px;
+    padding: 0 10px 0 0;
+    margin: 0;
+    border: 0;
+    }
+    td.last {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    }
+
+</style>
 @section('title', 'this week')
 
 @section('content')
@@ -10,7 +31,7 @@
 		<div class="table-responsive">
 			@foreach($dates as $date)
 				<table class="table table-hover table-striped">
-					<caption>{{ $date }}</caption>
+					<caption>{{ $date }}</caption> 
 					<tbody>
 						@foreach($halls as $hall)
 							<tr class="success">
@@ -20,12 +41,12 @@
 								@foreach($movies as $movie)
 									<tr>
 										@if(count($data[$date][$hall->id][$movie->name])>0)
-											<td class="active">{{ $movie->name }}</td>				
+											<td style="width:30%">{{ $movie->name }}</td>				
 											@foreach($data[$date][$hall->id][$movie->name] as $scheduleList)
-												<td class="active">{{ $scheduleList->showTime }}</td>
+												<td>{{ $scheduleList->showTime }}</td>
 											@endforeach
 											@for($l=4-count($data[$date][$hall->id][$movie->name]);$l>0;$l--)
-												<td class="active"></td>
+												<td></td>
 											@endfor
 											<td class="active"><a href="{{ url('/booking/'.$movie->name).'/'.$date.'/'.$data[$date][$hall->id]['hallName'] }}">Book Now!</a></td>
 										@endif

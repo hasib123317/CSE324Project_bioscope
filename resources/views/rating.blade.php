@@ -14,7 +14,7 @@
                  	@foreach($movies as $movie)
 
                     	<li class="active-link">
-                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='{{ $movie->name }};"><i class="fa fa-desktop ">{{ $movie->name }}</i></button><h2>{{ $movie->rating }}</h2>
+                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='{{ $movie->name }};"><i class="fa fa-desktop ">{{ $movie->name }}</i></button><p>The Current Rating is:{{ $movie->rating }}</p>
                     	</li>
                    	@endforeach
                 </ul>
@@ -50,7 +50,6 @@
 								 </div>
                             </div> 
                         </form>
-                        <p>Current rating is </p>
 					</div>                     
              </div>  
         </div>

@@ -12,7 +12,7 @@
                  	<?php foreach($movies as $movie): ?>
 
                     	<li class="active-link">
-                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='<?php echo e($movie->name); ?>;"><i class="fa fa-desktop "><?php echo e($movie->name); ?></i></button><h2><?php echo e($movie->rating); ?></h2>
+                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='<?php echo e($movie->name); ?>;"><i class="fa fa-desktop "><?php echo e($movie->name); ?></i></button><p>The Current Rating is:<?php echo e($movie->rating); ?></p>
                     	</li>
                    	<?php endforeach; ?>
                 </ul>
@@ -49,7 +49,6 @@
 								 </div>
                             </div> 
                         </form>
-                        <p>Current rating is </p>
 					</div>                     
              </div>  
         </div>

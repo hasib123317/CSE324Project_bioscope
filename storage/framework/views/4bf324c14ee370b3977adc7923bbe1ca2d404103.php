@@ -1,3 +1,25 @@
+<style type="text/css">
+    table {
+    width:100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    }
+
+    td {
+    width:176px;
+    padding: 0 10px 0 0;
+    margin: 0;
+    border: 0;
+    }
+    td.last {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    }
+
+</style>
 <?php $__env->startSection('title', 'this week'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -8,7 +30,7 @@
 		<div class="table-responsive">
 			<?php foreach($dates as $date): ?>
 				<table class="table table-hover table-striped">
-					<caption><?php echo e($date); ?></caption>
+					<caption><?php echo e($date); ?></caption> 
 					<tbody>
 						<?php foreach($halls as $hall): ?>
 							<tr class="success">
@@ -18,12 +40,12 @@
 								<?php foreach($movies as $movie): ?>
 									<tr>
 										<?php if(count($data[$date][$hall->id][$movie->name])>0): ?>
-											<td class="active"><?php echo e($movie->name); ?></td>				
+											<td style="width:30%"><?php echo e($movie->name); ?></td>				
 											<?php foreach($data[$date][$hall->id][$movie->name] as $scheduleList): ?>
-												<td class="active"><?php echo e($scheduleList->showTime); ?></td>
+												<td><?php echo e($scheduleList->showTime); ?></td>
 											<?php endforeach; ?>
 											<?php for($l=4-count($data[$date][$hall->id][$movie->name]);$l>0;$l--): ?>
-												<td class="active"></td>
+												<td></td>
 											<?php endfor; ?>
 											<td class="active"><a href="<?php echo e(url('/booking/'.$movie->name).'/'.$date.'/'.$data[$date][$hall->id]['hallName']); ?>">Book Now!</a></td>
 										<?php endif; ?>
