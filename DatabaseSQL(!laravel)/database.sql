@@ -44,8 +44,7 @@ CREATE TABLE shows (
 	id INTEGER(10) AUTO_INCREMENT,
 	movie_id INTEGER(10),
 	hall_id INTEGER(5),
-	start_time DATE,
-	end_time DATE,
+	start_time DATETIME,
 	language VARCHAR(20),
 	available_seat INTEGER(3),
 
@@ -67,15 +66,17 @@ CREATE TABLE ticket (
 );
 
 CREATE TABLE booking (
+	id INTEGER(10)
 	user_id INTEGER(10),
-	ticket_id INTEGER(10),
 	show_id INTEGER(10),
 	booking_date DATE,
-	payment_no INTEGER(10),
+	payment_id VARCHAR(32),
+	payer_id VARCHAR(32),
+	token VARCHAR(32),
+	price INTEGER(5),
 
-	PRIMARY KEY(user_id, ticket_id, show_id),
+	PRIMARY KEY(id),
 	FOREIGN KEY(user_id) REFERENCES user(id),
-	FOREIGN KEY(ticket_id) REFERENCES ticket(id),
 	FOREIGN KEY(show_id) REFERENCES shows(id)
 );
 
