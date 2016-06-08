@@ -21,7 +21,8 @@ class Shows extends Model
 						"select DATE_FORMAT(shows.start_time,'%h:%i') as showTime  
 						from shows inner join movie on shows.movie_id = movie.id 
 						where movie.name = '$movie' and shows.hall_id = $hall and 
-						DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$date' order by showTime"
+						DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$date' and
+						shows.available_seat>0 order by showTime"
    					) 
 			  );
 	}

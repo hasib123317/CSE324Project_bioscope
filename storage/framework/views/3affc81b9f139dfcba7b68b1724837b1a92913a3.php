@@ -5,6 +5,11 @@
 		document.getElementById('schedule').className="active";
 	</script>
 	<div id="schedulebox" style="margin-top:100px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+		<?php if(Session::has('success')): ?>
+			<p>Congratulation! your booking is successful. Your transaction token no. <?php echo e(Session::get('token')); ?></p>
+		<?php else: ?> if(Session::has('error'))
+			<p>Sorry booking is not successful</p>
+		<?php endif; ?>
 		<div class="table-responsive">
 			<?php foreach($dates as $date): ?>
 				<table class="table table-hover table-striped">
