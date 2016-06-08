@@ -9,7 +9,7 @@
 	<div id="schedulebox" style="margin-top:100px" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
 		@if(Session::has('success'))
 			<p>Congratulation! your booking is successful. Your transaction token no. {{ Session::get('token') }}</p>
-		@else if(Session::has('error'))
+		@elseif(Session::has('error'))
 			<p>Sorry booking is not successful</p>
 		@endif
 		<div class="table-responsive">
