@@ -1,6 +1,6 @@
-@extends('layouts.header1')	
+	
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- /. NAV TOP  -->
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
@@ -8,25 +8,24 @@
 
 
             <li >
-                <a href="{{ url('admin-panel') }}" ><i class="fa fa-desktop "></i>Dashboard</a>
+                <a href="<?php echo e(url('admin-panel')); ?>" ><i class="fa fa-desktop "></i>Dashboard</a>
             </li>
 
             <li>
-                <a href="{{ url('admin-profile') }}"><i class="fa fa-edit "></i>My Profile Page </a>
+                <a href="<?php echo e(url('admin-profile')); ?>"><i class="fa fa-edit "></i>My Profile Page </a>
             </li>
 
         </ul>
     </div>
 
 </nav>
-<<<<<<< HEAD
-=======
 
 <div id="signupbox" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
          <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form" action="{{ url('/queryBooking') }}" method="POST">
-               {!! csrf_field() !!}
+            <form id="signupform" class="form-horizontal" role="form" action="<?php echo e(url('/queryBooking')); ?>" method="POST">
+               <?php echo csrf_field(); ?>
+
                <div class="form-group">
                   <label for="token" class="col-md-3 control-label">Search By token</label>
                   <div class="col-md-9">
@@ -58,7 +57,6 @@
          </div>
       </div>
    </div>
->>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
 <!-- /. NAV SIDE  -->
 <div id="page-wrapper" >
     <div id="page-inner">
@@ -76,45 +74,37 @@
 							 <th>Show time</th>
 		                     <th>Movie genre</th>
 							 <th>Paid price</th>
-<<<<<<< HEAD
-		                     <th>Payment ID</th>
-=======
 		                     <th>Token</th>
->>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
 		                 </tr>
-		                 @foreach($bookings as $booking)
+		                 <?php foreach($bookings as $booking): ?>
 		                 <tr>
-		                   <td>{{ $booking->id }}</td>
-		                   <td>{{ $booking->user_id }}</td>
-		                   <td>{{ $booking->show_id }}</td>
-		                   <td>{{ $booking->show_time }}</td>
-						   <td>{{ $booking->movie_genre }}</td>
-		                   <td>{{ $booking->paid }}</td>
-<<<<<<< HEAD
-						   <td>{{ $booking->payment_id }}</td>
-=======
-						   <td>{{ $booking->token }}</td>
->>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
+		                   <td><?php echo e($booking->id); ?></td>
+		                   <td><?php echo e($booking->user_id); ?></td>
+		                   <td><?php echo e($booking->show_id); ?></td>
+		                   <td><?php echo e($booking->show_time); ?></td>
+						   <td><?php echo e($booking->movie_genre); ?></td>
+		                   <td><?php echo e($booking->paid); ?></td>
+						   <td><?php echo e($booking->token); ?></td>
 		                  </tr>
-		                 @endforeach
+		                 <?php endforeach; ?>
 		           </tbody>
 		       </table>
 
 		   	<p>
 				Total sale from this site :
-				@if($revenue!=NULL) 
-					{{ $revenue }} unit
-				@else
+				<?php if($revenue!=NULL): ?> 
+					<?php echo e($revenue); ?> unit
+				<?php else: ?>
 					0 unit
-				@endif					
+				<?php endif; ?>					
 		   	</p>
 		   	<p>Ticket sale count for different movie genre:</p>
 			<ul>
-				<li>sci-fi : {{ $movieData['sci-fi'] }}</li>
-				<li>action : {{ $movieData['action'] }}</li>
-				<li>fantasy : {{ $movieData['fantasy'] }}</li>
-				<li>animation : {{ $movieData['animation'] }}</li>
-				<li>drama : {{ $movieData['drama'] }}</li>
+				<li>sci-fi : <?php echo e($movieData['sci-fi']); ?></li>
+				<li>action : <?php echo e($movieData['action']); ?></li>
+				<li>fantasy : <?php echo e($movieData['fantasy']); ?></li>
+				<li>animation : <?php echo e($movieData['animation']); ?></li>
+				<li>drama : <?php echo e($movieData['drama']); ?></li>
 			</ul>
 
        </div>	
@@ -129,8 +119,7 @@
 <!-- /. PAGE INNER  -->
 </div>
 <!-- /. PAGE WRAPPER  -->
-<<<<<<< HEAD
-=======
 
->>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.header1', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

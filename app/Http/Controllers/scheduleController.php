@@ -38,7 +38,7 @@ class scheduleController extends Controller
 				{
 					$data[$dates[$l]][$hall->id][$movie->name] = DB::select( 
 														 DB::raw(
-															"select DATE_FORMAT(shows.start_time,'%h:%i') as showTime  
+															"select DATE_FORMAT(shows.start_time,'%h:%i %p') as showTime  
 															 from shows inner join movie on shows.movie_id = movie.id 
 															 where movie.name = '$movie->name' and shows.hall_id = $hall->id and 
 															 DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$dates[$l]' order by showTime"

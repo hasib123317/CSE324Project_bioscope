@@ -29,11 +29,12 @@ class ratingController extends Controller
 	
 	public function ratingFinish(Request $request)
 	{
-		$movie = Movie::where('name', '=', $request->get('movie'))->first();
+		$movie = Movie::where('name', '=', $request->get('name'))->first();
+		//return $movie->name;
 		$movie->rating = ($movie->rating * $movie->rated_by)+$request->get('rating');
 		$movie->rated_by =  $movie->rated_by+1;
 		$movie->rating = ($movie->rating)/($movie->rated_by); 
-		$movie->save(); 				
+		$movie->save(); 		
 
 		return redirect('/rate');		
 	}

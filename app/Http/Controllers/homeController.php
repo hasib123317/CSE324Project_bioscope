@@ -16,7 +16,7 @@ class homeController extends Controller
     //
 	public function index() {
 		
-		$movies = Movie::all();
+		$movies = DB::select(DB::raw("SELECT DISTINCT(m.name),m.img_path FROM `movie` m join shows s on(m.id=s.movie_id) WHERE s.start_time>=now()"));
 
 		return view('home', [ 'movies' => $movies ]);
 	}

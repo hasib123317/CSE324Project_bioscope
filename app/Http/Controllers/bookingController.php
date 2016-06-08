@@ -52,7 +52,11 @@ class bookingController extends Controller
 			$showTimes = Shows::bookingData($movie, $date, $hallId);
 			
 			if(count($showTimes)==0){
+<<<<<<< HEAD
 				return "Sorry no seats available";			
+=======
+				return view('noShow');			
+>>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
 			}	
 
 			return view('/booking', [ 'showTimes' => $showTimes, 'hallprice' => $hallprice , 'movie' => $movie , 'date' => $date , 'hall' => $hallId ] );
@@ -175,11 +179,19 @@ class bookingController extends Controller
 			$booking = new Booking();
 			$booking->user_id =  Auth::user()->id;
 			$booking->show_id = Session::get('show_id');
+<<<<<<< HEAD
 			$booking->booking_date = "'".date('Y-m-d h:i:s')."'";
 			$booking->price = Session::get('ticketPrice');
 			$booking->payment_id = "'".Input::get('paymentId')."'";
 			$booking->payer_id = "'".Input::get('PayerID')."'";
 			$booking->token = "'".Input::get('token')."'";
+=======
+			$booking->booking_date = date('Y-m-d');
+			$booking->price = Session::get('ticketPrice');
+			$booking->payment_id = Input::get('paymentId');
+			$booking->payer_id = Input::get('PayerID');
+			$booking->token = Input::get('token');
+>>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
 			$booking->save();
 
 			$show = Shows::find($booking->show_id);
@@ -192,7 +204,11 @@ class bookingController extends Controller
 		    return redirect(url('/week-schedule'))
 		        ->with([ 'success' => 'Payment success' , 'token' => Input::get('token') ]);
 		}
+<<<<<<< HEAD
 		return redirect(url('/'))
+=======
+		return redirect(url('/week-schedule'))
+>>>>>>> f99c6c8c3e530cc3271041daf24b879f25227125
 		    ->with([ 'error' => 'Payment failed' ]);
 	}
 }
