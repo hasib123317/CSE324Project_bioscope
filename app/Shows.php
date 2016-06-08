@@ -18,9 +18,9 @@ class Shows extends Model
 	{
 		return DB::select( 
 					DB::raw(
-						"select DATE_FORMAT(shows.start_time,'%h:%i') as showTime  
+						"select DATE_FORMAT(shows.start_time,'%h:%i %p') as showTime  
 						from shows inner join movie on shows.movie_id = movie.id 
-						where movie.name = '$movie' and shows.hall_id = $hall and 
+						where movie.name = '$movie' and shows.hall_id = $hall and shows.start_time>=now() and
 						DATE_FORMAT(shows.start_time, '%d-%M-%Y') = '$date' order by showTime"
    					) 
 			  );
@@ -33,7 +33,7 @@ class Shows extends Model
 						"select id  from shows 
 						where hall_id = $hall and 
 						DATE_FORMAT(start_time, '%d-%M-%Y') = '$date' and
-						DATE_FORMAT(start_time, '%h:%i') = '$time'"
+						DATE_FORMAT(start_time, '%h:%i %p') = '$time'"
    					) 
 			  );
 	}

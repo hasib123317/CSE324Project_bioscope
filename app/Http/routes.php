@@ -90,7 +90,13 @@ Route::get('/admin-panel/shows/insertShow', 'adminController@insertShow');
 
 Route::post('/createShow', 'adminController@createShow');
 
+Route::get('/admin-panel/shows/edit/{id}', 'adminController@updateShow');
+
+Route::post('/admin-panel/shows/save/{id}', 'adminController@saveShow');
+
 Route::get('/admin-profile', 'adminController@profile');
+
+Route::get('/admin-panel/bookings', 'adminController@showBooking');
 
 Route::get('/week-schedule', 'scheduleController@nextweek');
 
@@ -99,6 +105,8 @@ Route::get('/admin-panel/{id}', 'adminController@stub');
 Route::post('/admin-panel/{id}', 'adminController@stub');
 
 Route::get('/booking/{movie}/{date}/{hall}', 'bookingController@startBookingProcess');
+
+Route::post('/queryBooking', 'adminController@queryBooking');
 
 Route::post('payment', array(
     'as' => 'payment',

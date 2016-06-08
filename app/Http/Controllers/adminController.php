@@ -10,6 +10,7 @@ use App\Hall;
 use App\Movie;
 use App\Shows;
 use App\User;
+use App\Booking;
 use DB;
 
 class adminController extends Controller
@@ -468,4 +469,43 @@ class adminController extends Controller
 			return view('admin_panel.showAdmin', [ 'users' => $users ]);
 		}
 	}
+
+	public function showBooking()
+	{
+		if(Auth::check() && Auth::user()->isadmin){
+			$bookings = Booking::getBookingMovieDescription();
+			$revenue = Booking::getTotalRevenue();
+
+			$movieData = array();
+			$movieData['sci-fi'] = Booking::getGenreBasedBookCount('sci-fi');
+			$movieData['action'] = Booking::getGenreBasedBookCount('action');
+			$movieData['fantasy'] = Booking::getGenreBasedBookCount('fantasy');
+			$movieData['animation'] = Booking::getGenreBasedBookCount('animation');
+			$movieData['drama'] = Booking::getGenreBasedBookCount('drama');			
+	
+			return view('admin_panel.showBooking', [ 'bookings' => $bookings , 'revenue' => $revenue , 'movieData' => $movieData ]);
+		}
+	}
+
+	public function queryBooking(Request $request){
+		if($request->get('token')==NULL){
+			return redirect('/admin-panel/bookings');
+		}
+		
+		else{
+
+			$bookings = Booking::getBookingMovieDescriptionByToken($request->get('token'));
+			$revenue = Booking::getTotalRevenue();
+
+			$movieData = array();
+			$movieData['sci-fi'] = Booking::getGenreBasedBookCount('sci-fi');
+			$movieData['action'] = Booking::getGenreBasedBookCount('action');
+			$movieData['fantasy'] = Booking::getGenreBasedBookCount('fantasy');
+			$movieData['animation'] = Booking::getGenreBasedBookCount('animation');
+			$movieData['drama'] = Booking::getGenreBasedBookCount('drama');			
+			
+			return view('admin_panel.showBooking', [ 'bookings' => $bookings , 'revenue' => $revenue , 'movieData' => $movieData ]);
+		}
+	}
+
 }

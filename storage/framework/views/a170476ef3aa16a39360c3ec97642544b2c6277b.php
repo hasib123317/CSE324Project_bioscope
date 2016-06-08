@@ -12,7 +12,7 @@
                  	<?php foreach($movies as $movie): ?>
 
                     	<li class="active-link">
-                    	    <button class="btn btn-success" onClick="document.getElementById('movie_name').value='<?php echo e($movie->name); ?>;"><i class="fa fa-desktop "><?php echo e($movie->name); ?></i></button><p>The Current Rating is:<?php echo e($movie->rating); ?></p>
+                    	    <button class="btn btn-success" onClick="document.getElementById('name').value='<?php echo e($movie->name); ?>';"><i class="fa fa-desktop "><?php echo e($movie->name); ?></i></button><p>The Current Rating is:<?php echo e($movie->rating); ?></p>
                     	</li>
                    	<?php endforeach; ?>
                 </ul>
@@ -35,10 +35,10 @@
 
 														
                             <div class="input-group">
-                                 <label for="input-1" class="control-label">Rate This</label>
-    							 <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
+                                 <label for="rating" class="control-label">Rate This</label>
+    							 <input id="rating" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
                             </div>
-							<input id="movie_name" name="movie" type="hidden" value="">
+							<input id="name" name="name" type="hidden">
 
 							<div style="margin-top:10px" class="form-group">
                                  <!-- Button -->

@@ -49,7 +49,13 @@ class bookingController extends Controller
 			$hallprice['premium'] = $hall->premium_ticket_price;
 			$hallprice['regular'] = $hall->regular_ticket_price;
 			
-			return view('/booking', [ 'showTimes' => Shows::bookingData($movie, $date, $hallId), 'hallprice' => $hallprice , 'movie' => $movie , 'date' => $date , 'hall' => $hallId ] );
+			$showTimes = Shows::bookingData($movie, $date, $hallId);
+			
+			if(count($showTimes)==0){
+				return view('noShow');			
+			}	
+
+			return view('/booking', [ 'showTimes' => $showTimes, 'hallprice' => $hallprice , 'movie' => $movie , 'date' => $date , 'hall' => $hallId ] );
 		}
 		else{
 			return redirect('/login');
@@ -61,7 +67,10 @@ class bookingController extends Controller
 		$this->validate($request, [
     		'optradio' => 'required',
     	]);
+
 		Session::put('show_id', Shows::getIdByDateTimeHall($request->get('date'), $request->get('hall'), $request->get('time'))[0]->id);
+		Session::put('ticketPrice', $request->get('ticketPrice'));
+
 		$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
 		
@@ -132,7 +141,7 @@ class bookingController extends Controller
 		    return Redirect::away($redirect_url);
 		}
 
-		return Redirect::route('/booking')->with('error', 'Unknown error occurred');
+		return redirect(url('/booking'))->with('error', 'Unknown error occurred');
 	}
 
 	public function getPaymentStatus()
@@ -166,10 +175,11 @@ class bookingController extends Controller
 			$booking = new Booking();
 			$booking->user_id =  Auth::user()->id;
 			$booking->show_id = Session::get('show_id');
-			$booking->booking_date = "'".date('Y-m-d h:i:s')."'";
-			$booking->payment_id = "'".Input::get('paymentId')."'";
-			$booking->payer_id = "'".Input::get('PayerID')."'";
-			$booking->token = "'".Input::get('token')."'";
+			$booking->booking_date = date('Y-m-d');
+			$booking->price = Session::get('ticketPrice');
+			$booking->payment_id = Input::get('paymentId');
+			$booking->payer_id = Input::get('PayerID');
+			$booking->token = Input::get('token');
 			$booking->save();
 
 			$show = Shows::find($booking->show_id);
@@ -180,10 +190,10 @@ class bookingController extends Controller
 			$user->book_count = $user->book_count+1;
 			$user->save();
 		    return redirect(url('/week-schedule'))
-		        ->with('success', 'Payment success');
+		        ->with([ 'success' => 'Payment success' , 'token' => Input::get('token') ]);
 		}
-		return redirect('/')
-		    ->with('error', 'Payment failed');
+		return redirect(url('/week-schedule'))
+		    ->with([ 'error' => 'Payment failed' ]);
 	}
 }
 
